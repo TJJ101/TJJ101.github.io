@@ -229,27 +229,26 @@ footer { padding: 2rem 0 3rem; color: var(--muted); font-size: 0.9rem; border-to
   margin: 0;
 }
 
-/* Blog year sections */
-.blog-year-section {
+/* Override global section styling */
+section.blog-year-section {
   padding: 2rem 0;
   border-top: none;
 }
 
-/* Add one separator between year groups */
-.blog-year-section + .blog-year-section {
+/* Separator between year groups */
+section.blog-year-section + section.blog-year-section {
   border-top: 1px solid var(--line);
-}
-
-/* First year doesn't need extra top spacing */
-.blog-year-section:first-child {
-  padding-top: 0;
 }
 
 .blog-year {
   font-family: var(--display);
   font-size: 1.5rem;
   font-weight: 800;
-  margin: 0 0 1rem;
+  margin: 3rem 0 1rem;
+}
+
+.blog-year:first-child {
+  margin-top: 0;
 }
 
 /* Blog articles */
@@ -258,10 +257,9 @@ footer { padding: 2rem 0 3rem; color: var(--muted); font-size: 0.9rem; border-to
   padding: 1.75rem 0;
 }
 
-/*
 .post:first-of-type {
   border-top: 1px solid var(--line);
-} */
+}
 
 .post .meta {
   color: var(--muted);
