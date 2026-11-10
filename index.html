@@ -3,10 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- EDIT: your name and a one-line description (shows in browser tab and search results) -->
-<title>Your Name – Software Developer</title>
-<meta name="description" content="Portfolio of Your Name, a software developer who builds web apps and developer tools.">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👋</text></svg>">
+<title>Tan Jun Jie – Aspiring Software Developer</title>
+<meta name="description" content="Portfolio of Tan Jun Jie, an aspiring software developer who builds real-time graphics applications and games in C++.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💻</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
@@ -52,7 +51,7 @@
     line-height: 1.6;
   }
   a { color: inherit; }
-  a:focus-visible, button:focus-visible {
+  a:focus-visible, button:focus-visible, summary:focus-visible {
     outline: 3px solid var(--accent);
     outline-offset: 3px;
     border-radius: 2px;
@@ -95,10 +94,11 @@
   .btn {
     display: inline-block; padding: 0.7rem 1.25rem; font-weight: 500;
     text-decoration: none; border: 2px solid var(--ink); border-radius: 4px;
+    transition: transform 0.15s, box-shadow 0.15s;
   }
   .btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
   .btn:hover { transform: translate(-2px, -2px); box-shadow: 3px 3px 0 var(--ink); }
-  .btn { transition: transform 0.15s, box-shadow 0.15s; }
+  .btn.small { padding: 0.45rem 0.9rem; font-size: 0.95rem; }
 
   /* Sections */
   section { padding: clamp(2.5rem, 6vw, 4.5rem) 0; border-top: 1px solid var(--line); }
@@ -108,25 +108,52 @@
     letter-spacing: -0.02em; line-height: 1.1; margin: 0 0 2rem;
   }
 
-  /* Projects */
-  .projects { list-style: none; margin: 0; padding: 0; }
-  .project {
+  /* Projects: each one is a <details> that opens on click */
+  .projects { border-top: 1px solid var(--line); }
+  .project { border-bottom: 1px solid var(--line); scroll-margin-top: 1rem; }
+  .project > summary {
     display: grid; grid-template-columns: 1fr 1.4fr; gap: 1rem 2.5rem;
-    padding: 1.75rem 0; border-bottom: 1px solid var(--line);
+    padding: 1.75rem 0; cursor: pointer; list-style: none;
   }
-  .project:first-child { padding-top: 0; }
+  .project > summary::-webkit-details-marker { display: none; }
   .project h3 {
     font-family: var(--display); font-weight: 800; font-size: 1.6rem;
     letter-spacing: -0.015em; line-height: 1.15; margin: 0 0 0.4rem;
   }
-  .project h3 a { text-decoration: none; background: linear-gradient(var(--accent), var(--accent)) 0 100% / 0 3px no-repeat; transition: background-size 0.2s; }
-  .project h3 a:hover { background-size: 100% 3px; }
+  .project > summary:hover h3 { color: var(--accent); }
   .stack { color: var(--muted); font-size: 0.92rem; margin: 0; }
-  .project p { margin: 0 0 0.75rem; }
-  .links { display: flex; gap: 1.25rem; font-size: 0.95rem; }
-  .links a { color: var(--accent); text-underline-offset: 3px; }
+  .summary-text p { margin: 0 0 0.75rem; }
+  .note { font-size: 0.92rem; font-weight: 500; color: var(--accent); margin: 0 0 0.75rem; }
+  .toggle { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.95rem; font-weight: 500; color: var(--accent); }
+  .toggle::before {
+    content: "+"; display: inline-grid; place-items: center;
+    width: 1.5rem; height: 1.5rem; border: 2px solid currentColor; border-radius: 50%;
+    font-size: 1.1rem; line-height: 1;
+  }
+  .toggle::after { content: "Show details"; }
+  .project[open] .toggle::before { content: "–"; }
+  .project[open] .toggle::after { content: "Hide details"; }
 
-  /* Experience (a real sequence, so a timeline fits) */
+  .detail { padding: 0 0 2.25rem; }
+  .detail .text { max-width: 44rem; }
+  .detail .text p { margin: 0 0 1rem; }
+  .links { display: flex; flex-wrap: wrap; gap: 0.75rem; margin: 1.25rem 0 0; }
+
+  /* Media: screenshots, videos, PDFs */
+  .media { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: 1.25rem; margin-top: 1.75rem; }
+  .media:empty { display: none; }
+  .media figure { margin: 0; }
+  .media .wide { grid-column: 1 / -1; }
+  .media img, .media video {
+    display: block; width: 100%; height: auto;
+    border: 1px solid var(--line); border-radius: 4px; background: var(--line);
+  }
+  .media figcaption { font-size: 0.9rem; color: var(--muted); margin-top: 0.4rem; }
+  .embed { position: relative; aspect-ratio: 16 / 9; border: 1px solid var(--line); border-radius: 4px; overflow: hidden; }
+  .embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .pdf iframe { width: 100%; height: 36rem; border: 1px solid var(--line); border-radius: 4px; }
+
+  /* Timeline (education) */
   .timeline { list-style: none; margin: 0; padding: 0 0 0 1.5rem; border-left: 2px solid var(--ink); }
   .timeline li { position: relative; padding: 0 0 2rem; }
   .timeline li:last-child { padding-bottom: 0; }
@@ -149,12 +176,13 @@
   footer { padding: 2rem 0 3rem; color: var(--muted); font-size: 0.9rem; border-top: 1px solid var(--line); }
 
   @media (max-width: 40rem) {
-    .project { grid-template-columns: 1fr; }
+    .project > summary { grid-template-columns: 1fr; }
     .bar nav { gap: 1rem; }
+    .pdf iframe { height: 26rem; }
   }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
-    .btn, .project h3 a { transition: none; }
+    .btn { transition: none; }
     .btn:hover { transform: none; }
   }
 </style>
@@ -163,119 +191,230 @@
 <div class="wrap">
 
   <header class="bar">
-    <a class="home" href="#top">YN</a>
+    <a class="home" href="#top">TJJ</a>
     <nav aria-label="Main">
       <a href="#projects">Projects</a>
-      <a href="#experience">Experience</a>
+      <a href="#education">Education</a>
       <a href="#contact">Contact</a>
     </nav>
   </header>
 
   <main id="top">
-    <!-- EDIT: your name, one sentence about what you build, and what you're up to now -->
     <div class="hero">
-      <h1>Your Name</h1>
-      <p class="lead">I’m a software developer who builds <mark>web apps and developer tools</mark> that are fast, simple to use, and easy to maintain.</p>
-      <p class="now">Right now I’m learning Rust and looking for my first full-time developer role.</p>
+      <h1>Tan Jun Jie</h1>
+      <p class="lead">I build <mark>software and real-time graphics applications</mark>, with a particular interest in C++, systems programming, and interactive technologies.</p>
+      <p class="now">Currently pursuing a BSc in Computer Science in Real-Time Interactive Simulation at Singapore Institute of Technology, with an expected graduation in May 2028.</p>
       <div class="actions">
-        <a class="btn primary" href="#projects">See my projects</a>
-        <a class="btn" href="https://github.com/your-username">GitHub profile</a>
+        <a class="btn primary" href="#projects">Explore my projects</a>
+        <a class="btn" href="https://github.com/TJJ101">GitHub profile</a>
       </div>
     </div>
 
-    <!-- EDIT: replace with your 3–5 best projects. Copy a <li> block to add more. -->
+    <!--
+      ================= HOW TO ADD MEDIA TO A PROJECT =================
+      1. Put your files in the matching folder, e.g. media/lisd/poster.pdf
+         (folders already exist: media/lisd, media/get-me-out-of-hell, media/dwarf-mayhem)
+      2. Inside that project's <div class="media"> ... </div>, paste any of these:
+
+      SCREENSHOT (click to open full size):
+        <figure>
+          <a href="media/lisd/shot-1.png"><img src="media/lisd/shot-1.png" alt="Describe what the image shows" loading="lazy"></a>
+          <figcaption>Caption here</figcaption>
+        </figure>
+
+      VIDEO FILE (.mp4, keep it under ~25 MB or use YouTube instead):
+        <figure class="wide">
+          <video controls preload="metadata" poster="media/lisd/video-cover.png">
+            <source src="media/lisd/demo.mp4" type="video/mp4">
+          </video>
+          <figcaption>Caption here</figcaption>
+        </figure>
+
+      YOUTUBE VIDEO (replace VIDEO_ID with the part after v= in the link):
+        <figure class="wide">
+          <div class="embed">
+            <iframe src="https://www.youtube.com/embed/VIDEO_ID" title="Describe the video" loading="lazy" allowfullscreen></iframe>
+          </div>
+          <figcaption>Caption here</figcaption>
+        </figure>
+
+      PDF (research poster or paper): a button goes in the .links row, an inline viewer goes in .media:
+        <a class="btn small" href="media/lisd/poster.pdf">Read the poster (PDF)</a>
+
+        <figure class="wide pdf">
+          <iframe src="media/lisd/poster.pdf" title="Research poster"></iframe>
+          <figcaption>Research poster. <a href="media/lisd/poster.pdf">Open in a new tab</a></figcaption>
+        </figure>
+      ==================================================================
+    -->
+
     <section id="projects">
-      <h2>Projects</h2>
-      <ul class="projects">
-        <li class="project">
-          <div>
-            <h3><a href="https://github.com/your-username/project-one">Project One</a></h3>
-            <p class="stack">TypeScript, React, Node.js, PostgreSQL</p>
-          </div>
-          <div>
-            <p>A task manager for small teams. Supports real-time updates and keyboard shortcuts. Used by 40+ people at my university club.</p>
+      <h2>Selected Projects</h2>
+      <div class="projects">
+
+        <!-- PROJECT 1 -->
+        <details class="project" id="lisd">
+          <summary>
+            <div>
+              <h3>Lightweight Image-Space Deformation</h3>
+              <p class="stack">C++, GLSL, OpenGL, CMake, ImGui</p>
+            </div>
+            <div class="summary-text">
+              <p>A computer graphics research project on simulating surface bending, compression and wrinkles in a fragment shader, without changing the mesh.</p>
+              <p class="note">Research poster submitted to Pacific Graphics 2026</p>
+              <span class="toggle"></span>
+            </div>
+          </summary>
+          <div class="detail">
+            <div class="text">
+              <p>Lightweight Image-Space Deformation is a computer graphics research project exploring how convincing surface deformation can be simulated without modifying the underlying mesh geometry. The project investigates an alternative to traditional geometry-based deformation by using height information and fragment-shader techniques to create the visual appearance of surfaces bending, compressing, and forming wrinkles.</p>
+              <p>The implementation primarily uses a height-guided parallax approach. Rather than physically moving vertices or introducing a skeletal rig, the fragment shader perturbs texture coordinates based on height information to simulate changes in surface depth. This allows deformation effects to be generated at the image level while keeping the original mesh intact, reducing the need for expensive geometry updates.</p>
+              <p>The system is designed to support different materials and deformation characteristics. Various models and height maps are used to experiment with how surfaces respond to interaction, including skin-like, gel-like, and softer materials. Particular attention is given to producing convincing wrinkles and folds, where the visual response should reflect the direction and intensity of the applied deformation.</p>
+              <p>An additional aspect of the project is its exploration of haptic interaction. A physical input device, incorporating a pincer-style mechanism, is used to provide a tangible way of interacting with the simulated surface. The interaction connects physical input with the visual deformation response, allowing the project to explore how image-space techniques can be extended beyond purely visual applications.</p>
+              <p>The research poster has been submitted to Pacific Graphics 2026.</p>
+            </div>
             <div class="links">
-              <a href="https://github.com/your-username/project-one">Source code</a>
-              <a href="https://project-one.example.com">Live demo</a>
+              <!-- ADD: <a class="btn small" href="media/lisd/poster.pdf">Read the poster (PDF)</a> -->
+              <!-- ADD: <a class="btn small" href="https://github.com/TJJ101/YOUR-REPO-NAME">Source code</a> -->
+            </div>
+            <div class="media">
+              <!-- ADD media here (see the guide above the Projects section) -->
             </div>
           </div>
-        </li>
-        <li class="project">
-          <div>
-            <h3><a href="https://github.com/your-username/project-two">Project Two</a></h3>
-            <p class="stack">Python, FastAPI, Docker</p>
-          </div>
-          <div>
-            <p>A command-line tool that turns Markdown notes into a searchable static site. Builds a 500-page site in under two seconds.</p>
+        </details>
+
+        <!-- PROJECT 2 -->
+        <details class="project" id="get-me-out-of-hell">
+          <summary>
+            <div>
+              <h3>Get Me Out of Hell</h3>
+              <p class="stack">C++, GLSL, OpenGL ES 3.0, Android Studio</p>
+            </div>
+            <div class="summary-text">
+              <p>A 2D roguelite where terrain, materials and hazards shape every decision. Built on a custom framework for Windows and Android.</p>
+              <p class="note">Selected for a public showcase at SIT Artistry 2026</p>
+              <span class="toggle"></span>
+            </div>
+          </summary>
+          <div class="detail">
+            <div class="text">
+              <p>Get Me Out of Hell is a 2D roguelite developed around the idea of navigating a dangerous underground environment where the terrain and surrounding materials play an active role in gameplay. Instead of treating the environment as a static backdrop, the game explores how material behaviour and environmental hazards can influence the player’s decisions and create emergent situations.</p>
+              <p>A key part of the experience is the interaction between different environmental materials. Materials can move, accumulate, and react to their surroundings, meaning that changes to the terrain can affect how the player navigates an area. Environmental hazards such as heat, toxic substances, and liquid materials introduce additional challenges, requiring players to consider not only where they move but also how their surroundings may change over time.</p>
+              <p>The project was developed in C++ using OpenGL ES 3.0, with a custom framework supporting the game’s rendering and gameplay systems. Working with a lower-level graphics API provided experience with the underlying processes involved in building a game, rather than relying entirely on an existing game engine. The project also involved adapting the implementation for both Windows and Android, introducing the additional considerations of cross-platform development.</p>
+              <p>Beyond its gameplay, the project provided an opportunity to explore the relationship between simulation and game design: how environmental systems can create unpredictable interactions, and how those interactions can become meaningful gameplay challenges.</p>
+              <p>The game was selected for a public showcase at SIT Artistry 2026.</p>
+            </div>
             <div class="links">
-              <a href="https://github.com/your-username/project-two">Source code</a>
+              <!-- ADD: <a class="btn small" href="https://github.com/TJJ101/YOUR-REPO-NAME">Source code</a> -->
+            </div>
+            <div class="media">
+              <!-- ADD media here (see the guide above the Projects section) -->
             </div>
           </div>
-        </li>
-        <li class="project">
-          <div>
-            <h3><a href="https://github.com/your-username/project-three">Project Three</a></h3>
-            <p class="stack">Go, SQLite</p>
-          </div>
-          <div>
-            <p>A small URL shortener with usage analytics. Handles 1,000 requests per second on a single $5 server.</p>
+        </details>
+
+        <!-- PROJECT 3 -->
+        <details class="project" id="dwarf-mayhem">
+          <summary>
+            <div>
+              <h3>Dwarf Mayhem</h3>
+              <p class="stack">C++, Alpha Engine, Cellular Automata</p>
+            </div>
+            <div class="summary-text">
+              <p>A Noita-inspired 2D game where a cellular-automata material simulation drives destructible terrain.</p>
+              <span class="toggle"></span>
+            </div>
+          </summary>
+          <div class="detail">
+            <div class="text">
+              <p>Dwarf Mayhem is a Noita-inspired 2D game that explores simulation-driven gameplay through cellular automata and destructible environments. The central idea is to make the world itself an active part of the gameplay, where materials can interact dynamically instead of remaining fixed within a predefined level.</p>
+              <p>The project uses cellular automata to represent and simulate material behaviour across the game environment. Rather than relying solely on manually scripted interactions, the simulation allows individual material elements to update according to their surrounding conditions. This creates the foundation for dynamic terrain and material interactions, where the state of the environment can change as the player interacts with it.</p>
+              <p>Destructible terrain is an important part of the experience. The environment is not simply a collection of static obstacles; it can be altered during gameplay, allowing players to affect the world around them. This introduces opportunities for emergent interactions and makes the simulation an important component of the overall game experience.</p>
+              <p>Developed in C++ using the Alpha Engine, Dwarf Mayhem provided an opportunity to explore the implementation of simulation-based systems within a 2D game. In particular, it involved working with cellular automata as a foundation for representing dynamic materials and connecting those systems to the gameplay experience.</p>
+            </div>
             <div class="links">
-              <a href="https://github.com/your-username/project-three">Source code</a>
-              <a href="https://project-three.example.com">Live demo</a>
+              <!-- ADD: <a class="btn small" href="https://github.com/TJJ101/YOUR-REPO-NAME">Source code</a> -->
+            </div>
+            <div class="media">
+              <!-- ADD media here (see the guide above the Projects section) -->
             </div>
           </div>
-        </li>
-      </ul>
+        </details>
+
+      </div>
     </section>
 
-    <!-- EDIT: newest first. Include internships, freelance work, or open-source contributions. -->
-    <section id="experience">
-      <h2>Experience</h2>
+    <!--
+      EXPERIENCE: the placeholder entries (fake internship and open-source items) were removed.
+      When you have real internships or work to list, paste a section like this back in
+      and add <a href="#experience">Experience</a> to the nav:
+
+      <section id="experience">
+        <h2>Experience</h2>
+        <ol class="timeline">
+          <li>
+            <p class="when">Jun 2026 – Aug 2026</p>
+            <h3>Role, Company</h3>
+            <p>What you built and the result.</p>
+          </li>
+        </ol>
+      </section>
+    -->
+
+    <section id="education">
+      <h2>Education</h2>
       <ol class="timeline">
         <li>
-          <p class="when">2025 – Present</p>
-          <h3>Software Engineering Intern, Company Name</h3>
-          <p>Built internal dashboards in React and cut report generation time from 12 minutes to 40 seconds.</p>
+          <p class="when">2024 – Present</p>
+          <h3>B.Sc. Computer Science in Real-Time Interactive Simulation, Singapore Institute of Technology</h3>
+          <p><b>GPA: 4.65/5.0</b></p>
+          <p><b>Provost's List Commendation:</b> AY2025/2026 Trimester 1, AY2024/2025.</p>
         </li>
         <li>
-          <p class="when">2023 – 2025</p>
-          <h3>Open-source contributor, Project Name</h3>
-          <p>Fixed 15 bugs and added a plugin API. Reviewed pull requests from new contributors.</p>
-        </li>
-        <li>
-          <p class="when">2021 – 2025</p>
-          <h3>B.Sc. Computer Science, University Name</h3>
-          <p>Focus on distributed systems and databases.</p>
+          <p class="when">2020 – 2023</p>
+          <h3>Diploma in Information Technology, Ngee Ann Technology</h3>
         </li>
       </ol>
     </section>
 
-    <!-- EDIT: list only what you're comfortable being asked about in an interview -->
     <section id="skills">
       <h2>Skills</h2>
       <dl class="skills">
-        <div><dt>Languages</dt><dd>TypeScript, Python, Go, SQL</dd></div>
-        <div><dt>Frontend</dt><dd>React, HTML, CSS, accessibility</dd></div>
-        <div><dt>Backend</dt><dd>Node.js, FastAPI, PostgreSQL, REST APIs</dd></div>
-        <div><dt>Tools</dt><dd>Git, Docker, GitHub Actions, Linux</dd></div>
+        <div><dt>Languages</dt><dd>C++, C, Python, Java, JavaScript, SQL</dd></div>
+        <div><dt>Frontend</dt><dd>HTML, CSS</dd></div>
+        <div><dt>Tools</dt><dd>Git, RenderDoc, Android Studio, perf, Unreal Engine, CMake, GitHub Actions, Linux</dd></div>
       </dl>
     </section>
 
     <section id="contact" class="contact">
       <h2>Contact</h2>
-      <p>I’m open to full-time roles and freelance projects. The fastest way to reach me is email.</p>
+      <p>I’m open to full-time intern roles. The fastest way to reach me is email.</p>
       <div class="actions">
-        <a class="btn primary" href="mailto:you@example.com">Email me</a>
-        <a class="btn" href="https://www.linkedin.com/in/your-username">LinkedIn</a>
-        <a class="btn" href="https://github.com/your-username">GitHub</a>
+        <a class="btn primary" href="mailto:tanjunjie616@gmail.com">Email me</a>
+        <a class="btn" href="https://www.linkedin.com/in/junjie-tan-l0tm/">LinkedIn</a>
+        <a class="btn" href="https://github.com/TJJ101">GitHub</a>
       </div>
     </section>
   </main>
 
   <footer>
-    <!-- EDIT: your name -->
-    © 2026 Your Name. Hosted on GitHub Pages.
+    © 2026 Tan Jun Jie. Hosted on GitHub Pages.
   </footer>
 </div>
+
+<script>
+  // Lets a link like yoursite.github.io/#dwarf-mayhem open that project directly.
+  function openFromHash() {
+    var id = location.hash.slice(1);
+    if (!id) return;
+    var el = document.getElementById(id);
+    if (el && el.tagName === "DETAILS") {
+      el.open = true;
+      el.scrollIntoView();
+    }
+  }
+  window.addEventListener("hashchange", openFromHash);
+  openFromHash();
+</script>
 </body>
 </html>
