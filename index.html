@@ -150,6 +150,21 @@
   .detail { padding: 0 0 2.25rem; }
   .detail .text { max-width: 44rem; }
   .detail .text p { margin: 0 0 1rem; }
+  .detail .text h4 {
+  font-family: var(--display); font-weight: 800; font-size: 1.15rem;
+  letter-spacing: -0.01em; line-height: 1.25;
+  margin: 1.75rem 0 0.5rem; padding-left: 0.75rem;
+  border-left: 3px solid var(--accent);
+  }
+  .detail .text h4:first-child { margin-top: 0; }
+  .detail .text strong { font-weight: 600; }
+  .detail .text ul, .detail .text ol { margin: 0 0 1rem; padding-left: 1.5rem; }
+  .detail .text li { margin-bottom: 0.25rem; }
+  .detail .text li::marker { color: var(--accent); font-weight: 600; }
+  .detail .text mark {
+    background: linear-gradient(transparent 55%, var(--mark) 55%);
+    color: inherit; font-weight: 600; padding: 0 0.1em;
+  }
   .links { display: flex; flex-wrap: wrap; gap: 0.75rem; margin: 1.25rem 0 0; }
 
   /* Media: screenshots, videos, PDFs */
@@ -189,7 +204,7 @@
   footer { padding: 2rem 0 3rem; color: var(--muted); font-size: 0.9rem; border-top: 1px solid var(--line); }
 
   @media (max-width: 40rem) {
-    .project > summary { grid-template-columns: 1fr; }
+    .head { grid-template-columns: 1fr; }
     .bar nav { gap: 1rem; }
     .pdf iframe { height: 26rem; }
   }
@@ -207,6 +222,7 @@
     <a class="home" href="#top">TJJ</a>
     <nav aria-label="Main">
       <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
       <a href="#education">Education</a>
       <a href="#contact">Contact</a>
     </nav>
@@ -280,17 +296,32 @@
           </div>
           <div class="detail" id="lisd-detail">
             <div class="text">
-              <p>Lightweight Image-Space Deformation is a computer graphics research project exploring how convincing surface deformation can be simulated without modifying the underlying mesh geometry. The project investigates an alternative to traditional geometry-based deformation by using height information and fragment-shader techniques to create the visual appearance of surfaces bending, compressing, and forming wrinkles.</p>
-              <p>The implementation primarily uses a height-guided parallax approach. Rather than physically moving vertices or introducing a skeletal rig, the fragment shader perturbs texture coordinates based on height information to simulate changes in surface depth. This allows deformation effects to be generated at the image level while keeping the original mesh intact, reducing the need for expensive geometry updates.</p>
-              <p>The system is designed to support different materials and deformation characteristics. Various models and height maps are used to experiment with how surfaces respond to interaction, including skin-like, gel-like, and softer materials. Particular attention is given to producing convincing wrinkles and folds, where the visual response should reflect the direction and intensity of the applied deformation.</p>
-              <p>An additional aspect of the project is its exploration of haptic interaction. A physical input device, incorporating a pincer-style mechanism, is used to provide a tangible way of interacting with the simulated surface. The interaction connects physical input with the visual deformation response, allowing the project to explore how image-space techniques can be extended beyond purely visual applications.</p>
-              <p>The research poster has been submitted to Pacific Graphics 2026.</p>
+              <h4>The Idea</h4>
+              <p style="text-align: justify;">A computer graphics research project on simulating <strong>convincing surface deformation without modifying the underlying mesh geometry</strong>. 
+                Instead of traditional geometry-based deformation, it uses <strong>height information and fragment-shader techniques</strong> to make surfaces look like they're bending, compressing, and forming wrinkles.</p>
+              <h4>How It Works</h4>
+              <p style="text-align: justify;">The implementation uses a <strong>height-guided parallax approach</strong>. 
+                Rather than physically moving vertices or introducing a skeletal rig, the <strong>fragment shader perturbs texture coordinates</strong> based on height information to simulate changes in surface depth.</p>
+              <p style="text-align: justify;">Deformation is generated <strong>at the image level</strong> while keeping the original mesh intact, reducing the need for expensive geometry updates.</p>
+              <h4>Materials and Wrinkles</h4>
+              <p style="text-align: justify;">The system is designed to support different materials and deformation characteristics. Various models and height maps are used to experiment with how surfaces respond to interaction:</p>
+              <ul>
+                <li><strong>Skin-like</strong> surfaces</li>
+                <li><strong>Gel-like</strong> surfaces</li>
+                <li><strong>Softer</strong> materials</li>
+              </ul>
+              <p style="text-align: justify;">Particular attention goes to <strong>wrinkles and folds</strong>, where the visual response should reflect the <strong>direction and intensity</strong> of the applied deformation.</p>
+              <h4>Haptic Interaction (WIP)</h4>
+              <p style="text-align: justify;">A physical input device with a <strong>pincer-style mechanism</strong> provides a tangible way to interact with the simulated surface. 
+                It connects <strong>physical input with the visual deformation response</strong>, exploring how image-space techniques can be extended beyond purely visual applications.</p>
+              <h4>Status</h4>
+              <p style="text-align: justify;">The research poster has been submitted to <b>Pacific Graphics 2026</b>.</p>
             </div>
             <div class="links">
               <a class="btn small" href="media/lisd/A_Lightweight_Image_Space_Deformation_Method_PG26_Poster.pdf">Read the poster (PDF)</a>
               <!-- ADD: <a class="btn small" href="https://github.com/TJJ101/YOUR-REPO-NAME">Source code</a> -->
             </div>
-            <div class="media
+            <div class="media>
               <figure class="wide pdf">
                 <iframe src="media/lisd/A_Lightweight_Image_Space_Deformation_Method_PG26_Poster.pdf" title="Research poster"></iframe>
                 <figcaption>Research poster. <a href="media/lisd/A_Lightweight_Image_Space_Deformation_Method_PG26_Poster.pdf">Open in a new tab</a></figcaption>
@@ -309,24 +340,48 @@
             <div class="summary-text">
               <p>A 2D roguelite where terrain, materials and hazards shape every decision. Built on a custom framework for Windows and Android.</p>
               <p class="note">Selected for a public showcase at SIT Artistry 2026</p>
-              <button type="button" class="toggle" aria-expanded="true" aria-controls="lisd-detail"><span class="icon" aria-hidden="true"></span><span class="label">Hide details</span></button>
+              <button type="button" class="toggle" aria-expanded="true" aria-controls="get-me-out-of-hell-detail"><span class="icon" aria-hidden="true"></span><span class="label">Hide details</span></button>
             </div>
           </div>
           <div class="detail" id="get-me-out-of-hell-detail">
             <div class="text">
-              <p>Get Me Out of Hell is a 2D roguelite developed around the idea of navigating a dangerous underground environment where the terrain and surrounding materials play an active role in gameplay. Instead of treating the environment as a static backdrop, the game explores how material behaviour and environmental hazards can influence the player’s decisions and create emergent situations.</p>
-              <p>A key part of the experience is the interaction between different environmental materials. Materials can move, accumulate, and react to their surroundings, meaning that changes to the terrain can affect how the player navigates an area. Environmental hazards such as heat, toxic substances, and liquid materials introduce additional challenges, requiring players to consider not only where they move but also how their surroundings may change over time.</p>
-              <p>The project was developed in C++ using OpenGL ES 3.0, with a custom framework supporting the game’s rendering and gameplay systems. Working with a lower-level graphics API provided experience with the underlying processes involved in building a game, rather than relying entirely on an existing game engine. The project also involved adapting the implementation for both Windows and Android, introducing the additional considerations of cross-platform development.</p>
-              <p>Beyond its gameplay, the project provided an opportunity to explore the relationship between simulation and game design: how environmental systems can create unpredictable interactions, and how those interactions can become meaningful gameplay challenges.</p>
-              <p>The game was selected for a public showcase at SIT Artistry 2026.</p>
+              <h4>Overview</h4>
+              <p style="text-align: justify;">
+                Get Me Out of Hell is a <strong>creepy-cute 2D roguelike dungeon crawler</strong> inspired by the Moon Rabbit folklore of East Asian mythology.
+                While drawing inspiration from traditional dungeon-crawling experiences, the game introduces a different approach to dungeon progression: 
+                <strong>instead of exploring a pre-built dungeon, players construct their own dungeon one tile at a time</strong>, shaping the challenges they will encounter as they progress.
+              </p>
+              <h4>Dungeon Building and Gameplay Loop</h4>
+              <p style="text-align: justify;">
+                At the beginning of a run, players enter a dedicated map-building room where they can place a new dungeon tile. Each tile must be connected to the starting tile, allowing players to gradually expand their dungeon while determining its layout. <br><br>
+                Every newly placed tile is generated using a combination of randomly selected parameters, including its shape, modifiers, and loot rarity. These elements introduce variation between tiles, giving each placement the potential to create a different encounter and reward opportunity. <br><br>
+                Once a tile has been placed, players enter the dungeon and must clear that tile before returning to the map-building room. Only after completing the encounter can they expand their dungeon by placing another tile. This creates the game's core gameplay loop:</p>
+              <ul>
+                <li><strong>Map Building</strong></li>
+                <li><strong>Dungeon Combat</strong></li>
+                <li><strong>Map Building</strong></li>
+                <li><strong>Dungeon Combat</strong></li>
+                <li><strong>Repeat</strong></li>
+              </ul>
+              <p style="text-align: justify;">
+                By alternating between dungeon construction and combat, the game gives players <strong>an active role</strong> in shaping their own progression. Dungeon building becomes more than just a preparation phase; it directly determines the spaces players will explore and the challenges they will face.
+              </p>
+              <h4>Technical Implementation</h4>
+              <p style="text-align: justify;">
+                Developed using <strong>C++ and OpenGL ES 3.0</strong>, the project was built using <strong>a custom engine</strong> rather than relying on a full-fledged commercial game engine. The development process involved implementing the underlying systems needed to support the game's 2D gameplay and rendering.
+                The project was also developed for Windows and Android, introducing additional considerations for cross-platform compatibility.
+              </p>
+              <h4>Status</h4>
+              <p style="text-align: justify;">The game was selected for a public showcase at <a href="https://lnkd.in/p/g-N6imwh"><b>SIT Artistry 2026</b></a>.</p>
             </div>
             <div class="links">
               <!-- ADD: <a class="btn small" href="https://github.com/TJJ101/YOUR-REPO-NAME">Source code</a> -->
             </div>
             <div class="media">
               <figure class="wide">
-                <video controls preload="metadata" poster="media/lisd/video-cover.png">
-                  <source src="media/get-me-out-of-hell/Get Me Out of Hell_Trailer.mp4" type="video/mp4">
+                <!--<video controls preload="metadata" poster="media/lisd/video-cover.png"> -->
+                <video controls preload="metadata">
+                  <source src="media/get-me-out-of-hell/Get-Me-Out-of-Hell_Trailer.mp4" type="video/mp4">
                 </video>
                 <figcaption>Gameplay Trailer for Get Me out of Hell</figcaption>
               </figure>
@@ -343,15 +398,60 @@
             </div>
             <div class="summary-text">
               <p>A Noita-inspired 2D game where a cellular-automata material simulation drives destructible terrain.</p>
-              <button type="button" class="toggle" aria-expanded="true" aria-controls="lisd-detail"><span class="icon" aria-hidden="true"></span><span class="label">Hide details</span></button>
+              <button type="button" class="toggle" aria-expanded="true" aria-controls="dwarf-mayhem-detail"><span class="icon" aria-hidden="true"></span><span class="label">Hide details</span></button>
             </div>
           </div>
           <div class="detail" id="dwarf-mayhem-detail">
             <div class="text">
-              <p>Dwarf Mayhem is a Noita-inspired 2D game that explores simulation-driven gameplay through cellular automata and destructible environments. The central idea is to make the world itself an active part of the gameplay, where materials can interact dynamically instead of remaining fixed within a predefined level.</p>
-              <p>The project uses cellular automata to represent and simulate material behaviour across the game environment. Rather than relying solely on manually scripted interactions, the simulation allows individual material elements to update according to their surrounding conditions. This creates the foundation for dynamic terrain and material interactions, where the state of the environment can change as the player interacts with it.</p>
-              <p>Destructible terrain is an important part of the experience. The environment is not simply a collection of static obstacles; it can be altered during gameplay, allowing players to affect the world around them. This introduces opportunities for emergent interactions and makes the simulation an important component of the overall game experience.</p>
-              <p>Developed in C++ using the Alpha Engine, Dwarf Mayhem provided an opportunity to explore the implementation of simulation-based systems within a 2D game. In particular, it involved working with cellular automata as a foundation for representing dynamic materials and connecting those systems to the gameplay experience.</p>
+              <h4>Overview</h4>
+              <p style="text-align: justify;">
+                A Noita-inspired 2D mining game that explores <strong>simulation-driven gameplay</strong> through <strong>cellular automata and destructible environments</strong>. 
+                Players dig down toward <strong>the core</strong> of a world where materials <strong>interact dynamically</strong> instead of staying fixed in a predefined level.
+              </p>
+              <h4>Gameplay Loop</h4>
+              <ol>
+                <li><strong>Mine</strong> your way down to the core</li>
+                <li><strong>Sell</strong> what you collect at the shop. Every mined material earns money, and the shop <strong>only opens near the surface</strong>.</li>
+                <li><strong>Upgrade</strong> your gear with the money.</li>
+                <li><strong>Dig Deeper</strong> and repeat.</li>
+              </ol>
+              <p><strong>Ores</strong> are stone that sells for <strong>more money</strong>, so finding them speeds up progress.</p>
+              <h4>The Deeper You Go, The Harder It Gets</h4>
+              <ul>
+                <li><strong>Heat:</strong> temperature rises with depth, and players take <strong>more and more damage</strong>. Surviving means buying <strong>more heat armour</strong> and <strong>moving faster</strong>.</li>
+                <li><strong>Limited storage:</strong> players can only carry so much, and can <strong>upgrade their storage at the shop</strong>.</li>
+              </ul>
+              <p style="text-align: justify;">Because the shop only opens near the surface and storage is limited, players have to decide <strong>how deep to push before heading back to sell</strong>.</p>
+              <h4>Materials</h4>
+              <p style="text-align: justify;">Every material in the world is simulated with cellular automata, and falls into one of three groups:</p>
+              <ul>
+                <li><strong>Solids:</strong> Sand, Stone, Dirt (plus <strong>Ores</strong>, which are Stone that sells for more)</li>
+                <li><strong>Liquids:</strong> Water, Lava</li>
+                <li><strong>Gases:</strong> Steam, Toxic Gas</li>
+              </ul>
+              <h4>How Each Material Behaves</h4>
+              <ul>
+                <li><strong>Liquids flow down.</strong></li>
+                <li><strong>Stone stays in place.</strong> Sand and dirt behave like their real-life counterparts: they <strong>fall and flow, but don’t spread out</strong> like a liquid.</li>
+                <li><strong>Gases expand and float up.</strong></li>
+              </ul>
+              <p style="text-align: justify;">Liquids and gases also have a certain <strong>compressibility</strong>.</p>
+              <h4>Material Interactions</h4>
+              <ul>
+                <li><strong>Water meets lava</strong> and creates <strong>stone and steam</strong>.</li>
+                <li><strong>Solids sink through liquids</strong>, displacing the liquid.</li>
+                <li><strong>Gases rise through liquids.</strong></li>
+              </ul>
+              <p style="text-align: justify;">Rather than relying on manually scripted interactions alone, each material element <strong>updates according to its surrounding conditions</strong>, so the state of the environment keeps changing as the player interacts with it.</p>
+              <h4>Destructible Terrain</h4>
+              <p style="text-align: justify;"> 
+                The environment is not just a set of static obstacles. It can be <strong>altered during gameplay</strong>, letting players affect the world around them. 
+                Mining is how players earn money, so <strong>destroying terrain is the core of the game</strong>, and it opens up <strong>emergent interactions</strong> along the way.
+              </p>
+              <h4>Technical Implementation</h4>
+              <p style="text-align: justify;">
+                Built in <strong>C++ using the Alpha Engine</strong>. The project involved implementing <strong>simulation-based systems in a 2D game</strong>, using cellular automata to represent dynamic materials and connecting those systems to the gameplay experience.
+              </p>
             </div>
             <div class="links">
               <a class="btn small" href="https://github.com/TJJ101/Dwarf-Mayhem-Into-the-Depths-release">Release</a>
@@ -374,20 +474,20 @@
       <ol class="timeline">
         <li>
           <p class="when">Nov 2025 – Present</p>
-          <h3>Undegraduate Research Assistant, Singapore Institute of Technology</h3>
-          <p>Worked on the Lightweight Image-space Deformation project.</p>
+          <h3>Undergraduate Research Assistant, Singapore Institute of Technology</h3>
+          <p>• Worked on the Lightweight Image-space Deformation project.</p>
         </li>
         <li>
           <p class="when">Sep 2023 – Present</p>
-          <h3>Senior Military Intelligence Expert, Digital and Intelligence Expert</h3>
-          <p>Developed strong analytical reasoning and problem-solving capabilities.</p>
-          <p>Developed leadership and team collaboration skills through military service and work across SAF environments.</p>
+          <h3>Senior Military Intelligence Expert, Digital and Intelligence Service</h3>
+          <p>• Developed strong analytical reasoning and problem-solving capabilities.</p>
+          <p>• Developed leadership and team collaboration skills through military service and work across SAF environments.</p>
         </li>
         <li>
           <p class="when">Mar 2022 – Jul 2022</p>
           <h3>Application Services Intern, CapitaLand Investment</h3>
-          <p>Developed an asset tracking application using Microsoft Power Apps, replacing manual Excel-based tracking process with QR-code scanning for faster and more efficient asset updates.</p>
-          <p>Supported enterprise systems implementation, troubleshooting functionality, connectivity, and data issues; Provided end-user guidance and maintained support documentation.</p>
+          <p>• Developed an asset tracking application using Microsoft Power Apps, replacing manual Excel-based tracking process with QR-code scanning for faster and more efficient asset updates.</p>
+          <p>• Supported enterprise systems implementation, troubleshooting functionality, connectivity, and data issues; Provided end-user guidance and maintained support documentation.</p>
         </li>
       </ol>
     </section>
@@ -404,7 +504,7 @@
         </li>
         <li>
           <p class="when">2020 – 2023</p>
-          <h3>Diploma in Information Technology, Ngee Ann Technology</h3>
+          <h3>Diploma in Information Technology, Ngee Ann Polytechnic</h3>
         </li>
       </ol>
     </section>
