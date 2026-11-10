@@ -108,32 +108,45 @@
     letter-spacing: -0.02em; line-height: 1.1; margin: 0 0 2rem;
   }
 
-  /* Projects: each one is a <details> that opens on click */
+  /* Projects: text is freely selectable; only the button expands the card */
   .projects { border-top: 1px solid var(--line); }
-  .project { border-bottom: 1px solid var(--line); scroll-margin-top: 1rem; }
-  .project > summary {
-    display: grid; grid-template-columns: 1fr 1.4fr; gap: 1rem 2.5rem;
-    padding: 1.75rem 0; cursor: pointer; list-style: none;
+  .project {
+    border-bottom: 1px solid var(--line);
+    margin: 0 -1.25rem; padding: 0 1.25rem;
+    scroll-margin-top: 1rem;
+    box-shadow: inset 3px 0 0 transparent;
+    transition: background-color 0.15s, box-shadow 0.15s;
   }
-  .project > summary::-webkit-details-marker { display: none; }
+  /* Hovering anywhere on the card (or having it open) marks it as the active one */
+  .project.is-open { background: color-mix(in srgb, var(--accent) 6%, transparent); box-shadow: inset 3px 0 0 var(--accent); }
+  @media (hover: hover) {
+    .project:hover { background: color-mix(in srgb, var(--accent) 6%, transparent); box-shadow: inset 3px 0 0 var(--accent); }
+  }
+  .head { display: grid; grid-template-columns: 1fr 1.4fr; gap: 1rem 2.5rem; padding: 1.75rem 0; }
   .project h3 {
     font-family: var(--display); font-weight: 800; font-size: 1.6rem;
     letter-spacing: -0.015em; line-height: 1.15; margin: 0 0 0.4rem;
+    width: fit-content; transition: color 0.15s;
   }
-  .project > summary:hover h3 { color: var(--accent); }
+  /* The title only changes colour when the pointer is over the title text itself */
+  .project h3:hover { color: var(--accent); }
   .stack { color: var(--muted); font-size: 0.92rem; margin: 0; }
   .summary-text p { margin: 0 0 0.75rem; }
   .note { font-size: 0.92rem; font-weight: 500; color: var(--accent); margin: 0 0 0.75rem; }
-  .toggle { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.95rem; font-weight: 500; color: var(--accent); }
-  .toggle::before {
-    content: "+"; display: inline-grid; place-items: center;
+  .toggle {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font: inherit; font-size: 0.95rem; font-weight: 500; color: var(--accent);
+    background: none; border: 0; padding: 0.25rem 0; cursor: pointer;
+  }
+  .toggle:hover .label { text-decoration: underline; text-underline-offset: 3px; }
+  .toggle .icon {
+    display: inline-grid; place-items: center;
     width: 1.5rem; height: 1.5rem; border: 2px solid currentColor; border-radius: 50%;
     font-size: 1.1rem; line-height: 1;
   }
-  .toggle::after { content: "Show details"; }
-  .project[open] .toggle::before { content: "–"; }
-  .project[open] .toggle::after { content: "Hide details"; }
-
+  .toggle .icon::before { content: "+"; }
+  .project.is-open .toggle .icon::before { content: "–"; }
+ 
   .detail { padding: 0 0 2.25rem; }
   .detail .text { max-width: 44rem; }
   .detail .text p { margin: 0 0 1rem; }
@@ -253,8 +266,8 @@
       <div class="projects">
 
         <!-- PROJECT 1 -->
-        <details class="project" id="lisd">
-          <summary>
+        <article class="project" id="lisd">
+          <div class="head">
             <div>
               <h3>Lightweight Image-Space Deformation</h3>
               <p class="stack">C++, GLSL, OpenGL, CMake, ImGui</p>
@@ -262,10 +275,10 @@
             <div class="summary-text">
               <p>A computer graphics research project on simulating surface bending, compression and wrinkles in a fragment shader, without changing the mesh.</p>
               <p class="note">Research poster submitted to Pacific Graphics 2026</p>
-              <span class="toggle"></span>
+              <button type="button" class="toggle" aria-expanded="true" aria-controls="lisd-detail"><span class="icon" aria-hidden="true"></span><span class="label">Hide details</span></button>
             </div>
-          </summary>
-          <div class="detail">
+          </div>
+          <div class="detail" id="lisd-detail">
             <div class="text">
               <p>Lightweight Image-Space Deformation is a computer graphics research project exploring how convincing surface deformation can be simulated without modifying the underlying mesh geometry. The project investigates an alternative to traditional geometry-based deformation by using height information and fragment-shader techniques to create the visual appearance of surfaces bending, compressing, and forming wrinkles.</p>
               <p>The implementation primarily uses a height-guided parallax approach. Rather than physically moving vertices or introducing a skeletal rig, the fragment shader perturbs texture coordinates based on height information to simulate changes in surface depth. This allows deformation effects to be generated at the image level while keeping the original mesh intact, reducing the need for expensive geometry updates.</p>
@@ -284,11 +297,11 @@
               </figure>
             </div>
           </div>
-        </details>
+        </article>
 
         <!-- PROJECT 2 -->
-        <details class="project" id="get-me-out-of-hell">
-          <summary>
+        <article class="project" id="get-me-out-of-hell">
+          <div class="head">
             <div>
               <h3>Get Me Out of Hell</h3>
               <p class="stack">C++, GLSL, OpenGL ES 3.0, Android Studio</p>
@@ -296,10 +309,10 @@
             <div class="summary-text">
               <p>A 2D roguelite where terrain, materials and hazards shape every decision. Built on a custom framework for Windows and Android.</p>
               <p class="note">Selected for a public showcase at SIT Artistry 2026</p>
-              <span class="toggle"></span>
+              <button type="button" class="toggle" aria-expanded="true" aria-controls="lisd-detail"><span class="icon" aria-hidden="true"></span><span class="label">Hide details</span></button>
             </div>
-          </summary>
-          <div class="detail">
+          </div>
+          <div class="detail" id="get-me-out-of-hell-detail">
             <div class="text">
               <p>Get Me Out of Hell is a 2D roguelite developed around the idea of navigating a dangerous underground environment where the terrain and surrounding materials play an active role in gameplay. Instead of treating the environment as a static backdrop, the game explores how material behaviour and environmental hazards can influence the player’s decisions and create emergent situations.</p>
               <p>A key part of the experience is the interaction between different environmental materials. Materials can move, accumulate, and react to their surroundings, meaning that changes to the terrain can affect how the player navigates an area. Environmental hazards such as heat, toxic substances, and liquid materials introduce additional challenges, requiring players to consider not only where they move but also how their surroundings may change over time.</p>
@@ -319,21 +332,21 @@
               </figure>
             </div>
           </div>
-        </details>
+        </article>
 
         <!-- PROJECT 3 -->
-        <details class="project" id="dwarf-mayhem">
-          <summary>
+        <article class="project" id="dwarf-mayhem">
+          <div class="head">
             <div>
               <h3>Dwarf Mayhem</h3>
               <p class="stack">C++, Alpha Engine, Cellular Automata</p>
             </div>
             <div class="summary-text">
               <p>A Noita-inspired 2D game where a cellular-automata material simulation drives destructible terrain.</p>
-              <span class="toggle"></span>
+              <button type="button" class="toggle" aria-expanded="true" aria-controls="lisd-detail"><span class="icon" aria-hidden="true"></span><span class="label">Hide details</span></button>
             </div>
-          </summary>
-          <div class="detail">
+          </div>
+          <div class="detail" id="dwarf-mayhem-detail">
             <div class="text">
               <p>Dwarf Mayhem is a Noita-inspired 2D game that explores simulation-driven gameplay through cellular automata and destructible environments. The central idea is to make the world itself an active part of the gameplay, where materials can interact dynamically instead of remaining fixed within a predefined level.</p>
               <p>The project uses cellular automata to represent and simulate material behaviour across the game environment. Rather than relying solely on manually scripted interactions, the simulation allows individual material elements to update according to their surrounding conditions. This creates the foundation for dynamic terrain and material interactions, where the state of the environment can change as the player interacts with it.</p>
@@ -352,7 +365,7 @@
               </figure>
             </div>
           </div>
-        </details>
+        </article>
       </div>
     </section>
 
@@ -422,18 +435,34 @@
 </div>
 
 <script>
-  // Lets a link like yoursite.github.io/#dwarf-mayhem open that project directly.
-  function openFromHash() {
-    var id = location.hash.slice(1);
-    if (!id) return;
-    var el = document.getElementById(id);
-    if (el && el.tagName === "DETAILS") {
-      el.open = true;
-      el.scrollIntoView();
+  // Each project starts collapsed. Only the "Show details" button toggles it,
+  // so selecting or copying text never opens or closes a card.
+  // (Without JavaScript, all details stay visible.)
+  (function () {
+    function setOpen(card, open) {
+      var btn = card.querySelector(".toggle");
+      card.classList.toggle("is-open", open);
+      card.querySelector(".detail").hidden = !open;
+      btn.setAttribute("aria-expanded", String(open));
+      btn.querySelector(".label").textContent = open ? "Hide details" : "Show details";
     }
-  }
-  window.addEventListener("hashchange", openFromHash);
-  openFromHash();
+    document.querySelectorAll(".project").forEach(function (card) {
+      setOpen(card, false);
+      card.querySelector(".toggle").addEventListener("click", function () {
+        setOpen(card, !card.classList.contains("is-open"));
+      });
+    });
+    // A link like yoursite.github.io/#dwarf-mayhem opens that project directly.
+    function openFromHash() {
+      var el = document.getElementById(location.hash.slice(1));
+      if (el && el.classList.contains("project")) {
+        setOpen(el, true);
+        el.scrollIntoView();
+      }
+    }
+    window.addEventListener("hashchange", openFromHash);
+    openFromHash();
+  })();
 </script>
 </body>
 </html>
