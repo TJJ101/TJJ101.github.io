@@ -258,9 +258,10 @@ footer { padding: 2rem 0 3rem; color: var(--muted); font-size: 0.9rem; border-to
   padding: 1.75rem 0;
 }
 
+/*
 .post:first-of-type {
   border-top: 1px solid var(--line);
-}
+} */
 
 .post .meta {
   color: var(--muted);
